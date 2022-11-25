@@ -1,23 +1,32 @@
 package my.ohremchuk.car_rental.entity;
 
-import lombok.Data;
+import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.io.Serializable;
+import javax.persistence.*;
 
 @Data
 @Entity
+@ToString(exclude = "orderEntity")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Table(name = "car")
 public class CarEntity implements BaseEntity<Long> {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(
+            name = "increment",
+            strategy = "org.hibernate.id.IncrementGenerator"
+    )
     private Long id;
 
     private String brand;
     private String model;
     private String color;
-    private Long price;
+    private Double price;
 
+    @OneToOne(mappedBy = "carEntity", fetch = FetchType.EAGER)
+    @JoinColumn(name = "order_id")
+    private OrderEntity orderEntity;
 }

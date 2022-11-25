@@ -26,11 +26,15 @@ public class CarService implements AbstractService<Long, CarEntity> {
 
     @Override
     public Optional<CarEntity> findById(Long id) {
-        return Optional.empty();
+        return carRepository.findById(id);
     }
 
     @Override
     public List<CarEntity> findAll() {
-        return null;
+        return (List<CarEntity>) carRepository.findAll();
+    }
+
+    public CarEntity findCarByParameters(String brand, String model, String color, Double price) {
+        return carRepository.findByBrandAndModelAndColorAndPrice(brand, model, color, price);
     }
 }
