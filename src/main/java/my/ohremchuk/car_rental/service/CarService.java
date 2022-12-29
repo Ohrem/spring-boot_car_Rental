@@ -3,6 +3,8 @@ package my.ohremchuk.car_rental.service;
 import my.ohremchuk.car_rental.entity.CarEntity;
 import my.ohremchuk.car_rental.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,5 +38,9 @@ public class CarService implements AbstractService<Long, CarEntity> {
 
     public CarEntity findCarByParameters(String brand, String model, String color, Double price) {
         return carRepository.findByBrandAndModelAndColorAndPrice(brand, model, color, price);
+    }
+
+    public List<CarEntity> findAllCarsByBrand(String brand, Pageable pageable) {
+        return carRepository.findByBrand(brand, pageable);
     }
 }

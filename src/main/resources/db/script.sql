@@ -46,4 +46,6 @@ CREATE TABLE user
     role     VARCHAR(64)        NOT NULL
 );
 
+UPDATE car SET brand = 'AAA';
+
 DROP TABLE user;

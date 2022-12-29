@@ -1,0 +1,8 @@
+POST localhost:8080/admin/getAllByBrand
+Content-Type: application/json
+
+{
+  "brand": "bmw",
+  "page": 0,
+  "pageAmount": 3
+}
